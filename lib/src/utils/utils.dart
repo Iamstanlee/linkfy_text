@@ -1,0 +1,1 @@
+ nullify(dynamic value) {}
