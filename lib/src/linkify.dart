@@ -180,7 +180,7 @@ TextSpan _linkify({
           style: linkStyle,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              onTap!(link);
+              if (onTap != null) onTap(link);
             },
         ),
       );

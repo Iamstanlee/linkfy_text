@@ -4,8 +4,7 @@ A lightweight flutter package to linkify texts containing urls, emails and hasht
 
 [![pub package](https://img.shields.io/pub/v/linkfy_text.svg)](https://pub.dev/packages/linkfy_text)
 
-<!-- ![final](https://user-images.githubusercontent.com/43510799/104180838-2385fd80-5451-11eb-8506-1640b4ea829f.gif)
- -->
+![gif](ezgif.com-gif-maker.gif)
 
 ## Usage
 
@@ -44,12 +43,12 @@ Container(
 )
 ```
 
-| Parameters  | Default        | Description                                                                     |
-| ----------- | -------------- | ------------------------------------------------------------------------------- |
-| `textStyle` | `null`         | Style applied to the text                                                       |
-| `linkStyle` | `null`         | Style applied to the linkified text, defaults to the textStyle                  |
-| `linkTypes` | `LinkType.url` | A list of `LinkTypes` to be linkified in the text either a hashtag,email or url |
-| `onTap`     | `null`         | function with a `Link` paramater called when a link is pressed                  |
+| Parameters  | Default        | Description                                                                                                  |
+| ----------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `textStyle` | `null`         | Style applied to the text                                                                                    |
+| `linkStyle` | `null`         | Style applied to the linkified text, defaults to the textStyle                                               |
+| `linkTypes` | `LinkType.url` | A list of `LinkTypes` used to override the links to be linkified in the text either a hashtag, email or url. |
+| `onTap`     | `null`         | Callback function with a `Link` paramater called when a link is pressed                                      |
 
 # Contributions
 

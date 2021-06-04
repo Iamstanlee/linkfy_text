@@ -1,10 +1,10 @@
 name: linkfy_text
 description: A lightweight flutter package to linkify texts containing urls, emails and hashtags.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Iamstanlee/linkfy_text
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
