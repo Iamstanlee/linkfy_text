@@ -75,6 +75,9 @@ void main() {
       RegExp _emailRegExp = constructRegExpFromOptions([LinkOption.email]);
       RegExp _textRegExp = constructRegExpFromOptions(
           [LinkOption.url, LinkOption.hashTag, LinkOption.email]);
+      //   _textRegExp.allMatches(_text).forEach((e) {
+      //     print(e.group(0));
+      //   });
       expect(_urlRegExp.allMatches(_urlText).length, 4);
       expect(_hashtagRegExp.allMatches(_hashtagText).length, 2);
       expect(_emailRegExp.allMatches(_emailText).length, 2);

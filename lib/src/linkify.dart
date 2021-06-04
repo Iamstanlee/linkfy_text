@@ -36,7 +36,7 @@ class LinkifyText extends StatelessWidget {
   Widget build(BuildContext context) {
     //   TODO: add all Text properties
     return Text.rich(
-      formatText(
+      linkify(
         text: text,
         linkStyle: linkStyle,
         onTap: onTap,
@@ -48,7 +48,7 @@ class LinkifyText extends StatelessWidget {
   }
 }
 
-TextSpan formatText({
+TextSpan linkify({
   String text = '',
   TextStyle? linkStyle,
   List<LinkOption>? options = const [LinkOption.url],
