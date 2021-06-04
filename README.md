@@ -49,11 +49,11 @@ Container(
 | `textStyle` | `null`         | Style applied to the text                                                       |
 | `linkStyle` | `null`         | Style applied to the linkified text, defaults to the textStyle                  |
 | `linkTypes` | `LinkType.url` | A list of `LinkTypes` to be linkified in the text either a hashtag,email or url |
-| `onTap`     | `null`         | function with a `Link` called when a link is tapped                             |
+| `onTap`     | `null`         | function with a `Link` paramater called when a link is pressed                  |
 
 # Contributions
 
 Feel free to contribute to this project.
 
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an issue.
-If you fixed a bug or implemented a feature, please send a pull request.
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue][issue].  
+If you fixed a bug or implemented a feature, please send a [pull request][pr].

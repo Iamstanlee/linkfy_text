@@ -129,7 +129,7 @@ class LinkifyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text.rich(
-      linkify(
+      _linkify(
         text: text,
         linkStyle: linkStyle,
         onTap: onTap,
@@ -151,7 +151,7 @@ class LinkifyText extends StatelessWidget {
   }
 }
 
-TextSpan linkify({
+TextSpan _linkify({
   String text = '',
   TextStyle? linkStyle,
   List<LinkType>? linkTypes,
