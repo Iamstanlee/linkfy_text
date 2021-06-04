@@ -73,6 +73,7 @@ class _AppState extends State<App> {
             Center(
                 child: LinkifyText(
               "04. Flutter is #trending, goto https://flutter.dev to check it out. hey@pub.dev",
+              textAlign: TextAlign.center,
               linkTypes: [LinkType.hashTag, LinkType.url, LinkType.email],
               linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
               onTap: (link) {
