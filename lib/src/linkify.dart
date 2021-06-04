@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
+import 'package:linkify_text/src/enum.dart';
+import 'package:linkify_text/src/model/link.dart';
 import 'package:linkify_text/src/utils/regex.dart';
-
-enum LinkOption { url, email, hashTag }
 
 /// Linkify [text] containing urls, emails or hashtag
 class LinkifyText extends StatelessWidget {
   const LinkifyText(this.text,
-      {this.textStyle, this.linkStyle, this.options, this.onTap, Key? key})
+      {this.textStyle, this.linkStyle, this.linkTypes, this.onTap, Key? key})
       : super(key: key);
 
   /// text to be linkified
@@ -21,29 +21,28 @@ class LinkifyText extends StatelessWidget {
 
   /// called when a formatted link is pressed, it returns the link as a parameter
   /// ```dart
-  ///   LinkifyText("#helloWorld", onTap: (value) {
-  ///       // do stuff with value
-  ///       print("$value hashtag was tapped");
+  ///   LinkifyText("#helloWorld", onTap: (link) {
+  ///       // do stuff with link
+  ///       print("${link.value} hashtag was tapped");
   ///   });
   /// ```
-  final void Function(String)? onTap;
+  final void Function(Link)? onTap;
 
-  /// option to override the links to be formatted in the text, defaults to `[LinkOption.url]`
+  /// option to override the links to be formatted in the text, defaults to `[LinkType.url]`
   /// so only urls are being linkified in the text
-  final List<LinkOption>? options;
+  final List<LinkType>? linkTypes;
 
   @override
   Widget build(BuildContext context) {
-    //   TODO: add all Text properties
     return Text.rich(
       linkify(
         text: text,
         linkStyle: linkStyle,
         onTap: onTap,
-        options: options,
+        linkTypes: linkTypes,
       ),
       key: key,
-      style: linkStyle,
+      style: textStyle,
     );
   }
 }
@@ -51,10 +50,10 @@ class LinkifyText extends StatelessWidget {
 TextSpan linkify({
   String text = '',
   TextStyle? linkStyle,
-  List<LinkOption>? options = const [LinkOption.url],
-  Function(String)? onTap,
+  List<LinkType>? linkTypes,
+  Function(Link)? onTap,
 }) {
-  RegExp _regExp = constructRegExpFromOptions(options!);
+  RegExp _regExp = constructRegExpFromLinkType(linkTypes ?? [LinkType.url]);
 
   //  return the full text if there's no match or if empty
   if (!_regExp.hasMatch(text) || text.isEmpty) return TextSpan(text: text);
@@ -69,12 +68,11 @@ TextSpan linkify({
     ));
     if (links.length > 0) {
       RegExpMatch match = links.removeAt(0);
-      String link = match.input.substring(match.start, match.end);
-
+      Link link = Link.fromMatch(match);
       // add the link
       spans.add(
         TextSpan(
-          text: link,
+          text: link.value,
           style: linkStyle,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
@@ -84,6 +82,5 @@ TextSpan linkify({
       );
     }
   }
-
   return TextSpan(children: spans);
 }

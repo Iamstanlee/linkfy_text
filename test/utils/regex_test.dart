@@ -1,8 +1,7 @@
-import 'package:linkify_text/linkify_text.dart';
+import 'package:linkify_text/src/enum.dart';
 import 'package:linkify_text/src/utils/regex.dart';
 import 'package:test/test.dart';
 
-// TODO: write more testsss
 void main() {
   group('Regular Expression', () {
     /// test values
@@ -69,15 +68,12 @@ void main() {
       });
     });
 
-    test("Should construct regex pattern from LinkOptions and match", () {
-      RegExp _urlRegExp = constructRegExpFromOptions([LinkOption.url]);
-      RegExp _hashtagRegExp = constructRegExpFromOptions([LinkOption.hashTag]);
-      RegExp _emailRegExp = constructRegExpFromOptions([LinkOption.email]);
-      RegExp _textRegExp = constructRegExpFromOptions(
-          [LinkOption.url, LinkOption.hashTag, LinkOption.email]);
-      //   _textRegExp.allMatches(_text).forEach((e) {
-      //     print(e.group(0));
-      //   });
+    test("Should construct regex pattern from LinkTypes and match", () {
+      RegExp _urlRegExp = constructRegExpFromLinkType([LinkType.url]);
+      RegExp _hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
+      RegExp _emailRegExp = constructRegExpFromLinkType([LinkType.email]);
+      RegExp _textRegExp = constructRegExpFromLinkType(
+          [LinkType.url, LinkType.hashTag, LinkType.email]);
       expect(_urlRegExp.allMatches(_urlText).length, 4);
       expect(_hashtagRegExp.allMatches(_hashtagText).length, 2);
       expect(_emailRegExp.allMatches(_emailText).length, 2);

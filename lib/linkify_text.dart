@@ -2,3 +2,4 @@
 library linkify_text;
 
 export 'src/linkify.dart';
+export 'src/enum.dart';
