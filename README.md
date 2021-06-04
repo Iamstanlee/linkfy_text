@@ -1,6 +1,6 @@
 A lightweight flutter package to linkify texts containing urls, emails and hashtags.
 
-[![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/linkfy_text)
+<!-- [![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/linkfy_text) -->
 
 ## Using
 
