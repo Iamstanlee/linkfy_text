@@ -6,30 +6,54 @@ A lightweight flutter package to linkify texts containing urls, emails and hasht
 
 <!-- ![final](https://user-images.githubusercontent.com/43510799/104180838-2385fd80-5451-11eb-8506-1640b4ea829f.gif)
  -->
+
 ## Usage
+
+To use this package, add `linkfy_text` as a [dependency in your pubspec.yaml file](https://pub.dev/packages/linkfy_text/).
+
+Example:
 
 ```dart
 // first import the package
 import 'package:linkfy_text/linkify_text.dart';
 
-LinkifyText(
+Container(
+    child: LinkifyText(
     "This text contains a url: https://flutter.dev",
     linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
     onTap: (link) {
         /// do stuff with `link`
-    },
-);
-```
-
-Be default, The above snippet would linkify all urls in the string, you can choose whatxw type of link to linkify by passing the `linkTypes` parameter
-
-```dart
-LinkifyText(
-        "This text contains an #hashtag and a url",
-        linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
-        linkTypes: [LinkType.url, LinkType.hashtag]
-        onTap: (link) {
-            /// do stuff with `link`
         },
     );
+)
 ```
+
+Be default, The above snippet would linkify all urls in the string, you can choose what type of link to linkify by passing the `linkTypes` parameter
+
+```dart
+Container(
+    child: LinkifyText(
+    "This text contains a url: https://flutter.dev and #flutter",
+    linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
+    linkTypes: [LinkType.url, LinkType.hashtag]
+    onTap: (link) {
+        /// do stuff with `link` like
+        /// if(link.type == Linktype.url) launchUrl(link.value);
+        },
+    );
+)
+```
+
+| Parameters  | Default        | Description                                                                     |
+| ----------- | -------------- | ------------------------------------------------------------------------------- |
+| `textStyle` | `null`         | Style applied to the text                                                       |
+| `linkStyle` | `null`         | Style applied to the linkified text, defaults to the textStyle                  |
+| `linkTypes` | `LinkType.url` | A list of `LinkTypes` to be linkified in the text either a hashtag,email or url |
+| `onTap`     | `null`         | function with a `Link` called when a link is tapped                             |
+
+# Contributions
+
+Feel free to contribute to this project.
+
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an issue.
+If you fixed a bug or implemented a feature, please send a pull request.
