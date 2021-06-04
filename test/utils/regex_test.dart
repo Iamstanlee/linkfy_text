@@ -42,7 +42,7 @@ void main() {
     test("Should match all emails", () {
       _emails.forEach((e) {
         bool hasMatch = RegExp(emailRegExp).hasMatch(e);
-        expect(hasMatch, true);
+        expect(hasMatch, isTrue);
       });
     });
 
@@ -50,25 +50,25 @@ void main() {
       List<String> _emails = ["hello@world", "@js.com"];
       _emails.forEach((e) {
         bool hasMatch = RegExp(emailRegExp).hasMatch(e);
-        expect(hasMatch, false);
+        expect(hasMatch, isFalse);
       });
     });
 
     test("Should match all urls", () {
       _urls.forEach((u) {
         bool hasMatch = RegExp(urlRegExp).hasMatch(u);
-        expect(hasMatch, true);
+        expect(hasMatch, isTrue);
       });
     });
 
     test("Should match all hashtags", () {
       _hashtags.forEach((h) {
         bool hasMatch = RegExp(hashtagRegExp).hasMatch(h);
-        expect(hasMatch, true);
+        expect(hasMatch, isTrue);
       });
     });
 
-    test("Should construct regex pattern from LinkTypes and match", () {
+    test("Should construct regex pattern from LinkTypes and match length", () {
       RegExp _urlRegExp = constructRegExpFromLinkType([LinkType.url]);
       RegExp _hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
       RegExp _emailRegExp = constructRegExpFromLinkType([LinkType.email]);
