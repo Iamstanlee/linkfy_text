@@ -1,4 +1,4 @@
-import 'package:linkify_text/src/enum.dart';
+import 'package:linkfy_text/src/enum.dart';
 
 String urlRegExp = r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+';
 

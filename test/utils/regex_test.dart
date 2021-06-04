@@ -1,5 +1,5 @@
-import 'package:linkify_text/src/enum.dart';
-import 'package:linkify_text/src/utils/regex.dart';
+import 'package:linkfy_text/src/enum.dart';
+import 'package:linkfy_text/src/utils/regex.dart';
 import 'package:test/test.dart';
 
 void main() {

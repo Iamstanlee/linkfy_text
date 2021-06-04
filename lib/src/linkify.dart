@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:linkify_text/src/enum.dart';
-import 'package:linkify_text/src/model/link.dart';
-import 'package:linkify_text/src/utils/regex.dart';
+import 'package:linkfy_text/src/enum.dart';
+import 'package:linkfy_text/src/model/link.dart';
+import 'package:linkfy_text/src/utils/regex.dart';
 
 /// Linkify [text] containing urls, emails or hashtag
 class LinkifyText extends StatelessWidget {

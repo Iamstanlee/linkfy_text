@@ -67,7 +67,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  linkify_text:
+  linkfy_text:
     dependency: "direct main"
     description:
       path: ".."
