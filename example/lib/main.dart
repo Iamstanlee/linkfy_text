@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linkfy_text/linkify_text.dart';
+import 'package:linkfy_text/linkfy_text.dart';
 
 var scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() {
