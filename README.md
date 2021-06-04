@@ -4,7 +4,7 @@ A lightweight flutter package to linkify texts containing urls, emails and hasht
 
 [![pub package](https://img.shields.io/pub/v/linkfy_text.svg)](https://pub.dev/packages/linkfy_text)
 
-![gif](ezgif.com-gif-maker.gif)
+![gif](https://github.com/Iamstanlee/linkfy_text/blob/main/ezgif.com-gif-maker.gif)
 
 ## Usage
 
