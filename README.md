@@ -43,12 +43,25 @@ Container(
 )
 ```
 
-| Parameters  | Default        | Description                                                                                                  |
-| ----------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `textStyle` | `null`         | Style applied to the text                                                                                    |
-| `linkStyle` | `null`         | Style applied to the linkified text, defaults to the textStyle                                               |
-| `linkTypes` | `LinkType.url` | A list of `LinkTypes` used to override the links to be linkified in the text either a hashtag, email or url. |
-| `onTap`     | `null`         | Callback function with a `Link` paramater called when a link is pressed                                      |
+
+## API Reference
+
+#### LinkfyText
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `textStyle`      | `TextStyle` | style applied to the text |
+| `linkStyle`      | `TextStyle` | style applied to the linkified text. **defaults** to `textStyle` |
+| `linkTypes`      | `List<LinkType>` | a list of `LinkType` used to override the links to be linkified in a text either a url, hashtag or email. **defaults** to `[LinkType.url]`|
+| `onTap`      | `Function(Link)` | function called when a link is pressed |
+
+
+#### Link
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `type`      | `LinkType` | the link type either url, email or hashtag |
+| `value`      | `String` | value this link holds |
 
 # Contributions
 

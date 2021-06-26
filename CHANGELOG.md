@@ -1,3 +1,6 @@
+## 1.0.4
+
+- updated documentation
 ## 1.0.3
 
 - fix gif display on pub.dev
