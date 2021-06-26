@@ -1,6 +1,6 @@
 # linkfy_text
 
-A lightweight flutter package to linkify texts containing urls, emails and hashtags.
+A lightweight flutter package that linkifies a text containing urls, emails and hashtag like twitter does.
 
 [![pub package](https://img.shields.io/pub/v/linkfy_text.svg)](https://pub.dev/packages/linkfy_text)
 
@@ -54,5 +54,9 @@ Container(
 
 Feel free to contribute to this project.
 
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue][issue].  
-If you fixed a bug or implemented a feature, please send a [pull request][pr].
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue][issues].  
+If you fixed a bug or implemented a feature, please send a [pull request][prs].
+
+# TODO
+- linkify "@" mention
+- LinkifyTextField widget
