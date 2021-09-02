@@ -4,14 +4,14 @@ String urlRegExp = r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+';
 
 String hashtagRegExp = r'(#+[a-zA-Z0-9(_)]{1,})';
 
-String emailRegExp =
-    r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
+String userTagRegExp = r'(?<![\w@])@([\w@]+(?:[.!][\w@]+)*)';
+
+String emailRegExp = r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
 
 /// construct regexp. pattern from provided link linkTypes
 RegExp constructRegExpFromLinkType(List<LinkType> linkTypes) {
   // default case where we always want to match url strings
-  if (linkTypes.length == 1 && linkTypes.first == LinkType.url)
-    return RegExp(urlRegExp);
+  if (linkTypes.length == 1 && linkTypes.first == LinkType.url) return RegExp(urlRegExp);
 
   StringBuffer _regexBuffer = StringBuffer();
   for (var i = 0; i < linkTypes.length; i++) {
@@ -19,19 +19,16 @@ RegExp constructRegExpFromLinkType(List<LinkType> linkTypes) {
     final _isLast = i == linkTypes.length - 1;
     switch (_type) {
       case LinkType.url:
-        _isLast
-            ? _regexBuffer.write("($urlRegExp)")
-            : _regexBuffer.write("($urlRegExp)|");
+        _isLast ? _regexBuffer.write("($urlRegExp)") : _regexBuffer.write("($urlRegExp)|");
         break;
       case LinkType.hashTag:
-        _isLast
-            ? _regexBuffer.write("($hashtagRegExp)")
-            : _regexBuffer.write("($hashtagRegExp)|");
+        _isLast ? _regexBuffer.write("($hashtagRegExp)") : _regexBuffer.write("($hashtagRegExp)|");
+        break;
+      case LinkType.userTag:
+        _isLast ? _regexBuffer.write("($userTagRegExp)") : _regexBuffer.write("($userTagRegExp)|");
         break;
       case LinkType.email:
-        _isLast
-            ? _regexBuffer.write("($emailRegExp)")
-            : _regexBuffer.write("($emailRegExp)|");
+        _isLast ? _regexBuffer.write("($emailRegExp)") : _regexBuffer.write("($emailRegExp)|");
         break;
       default:
     }
@@ -45,8 +42,10 @@ LinkType getMatchedType(RegExpMatch match) {
     _type = LinkType.url;
   } else if (RegExp(hashtagRegExp).hasMatch(match.input)) {
     _type = LinkType.hashTag;
-  } else if (RegExp(hashtagRegExp).hasMatch(match.input)) {
+  } else if (RegExp(emailRegExp).hasMatch(match.input)) {
     _type = LinkType.email;
+  } else if (RegExp(userTagRegExp).hasMatch(match.input)) {
+    _type = LinkType.userTag;
   }
   return _type;
 }
