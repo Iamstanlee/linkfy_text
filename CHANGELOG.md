@@ -1,7 +1,8 @@
-## 1.1.4
+## 1.1.5
 
 - Enforce lint rules
 - Adds support for user tag/mention (@filippkowalski)
+- Minor bug fixes
 
 ## 1.0.4
 
