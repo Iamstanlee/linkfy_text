@@ -7,8 +7,8 @@ A lightweight flutter package that linkifies a text containing urls, emails, men
 [![coverage Status](https://coveralls.io/repos/github/Iamstanlee/linkfy_text/badge.svg?branch=main)](https://coveralls.io/github/Iamstanlee/linkfy_text?branch=main)
 
 <p>
-    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/1.png" width="200px" height="auto" hspace="20"/>
-    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/2.png" width="200px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/s1.png" width="200px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/s2.png" width="200px" height="auto" hspace="20"/>
 </p>
 
 ## Usage
