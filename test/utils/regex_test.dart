@@ -4,17 +4,17 @@ import 'package:test/test.dart';
 
 void main() {
   group('Regular Expression', () {
-    /// test values
-    final _urlText =
+    // test values
+    const urlText =
         "My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, http://example.com/method?param=fullstackoverflow.dev";
-    final _hashtagText = "#helloWorld and #dev are trending";
-    final _emailText =
+    const hashtagText = "#helloWorld and #dev are trending";
+    const emailText =
         "My email address is hey@stanleee.me and dev@gmail.com, yah!";
-    final _text = _urlText + _hashtagText + _emailText;
+    const text = urlText + hashtagText + emailText;
 
-    final _emails = ["hello@world.com", "foo.bar@js.com"];
+    const emails = ["hello@world.com", "foo.bar@js.com"];
 
-    final List<String> _urls = [
+    const urls = [
       "http://domain.com",
       "http://domain.com/",
       "https://domain.com",
@@ -28,7 +28,7 @@ void main() {
       "https://sub.domain.com/Google?param=helloworld#hash",
     ];
 
-    final List<String> _hashtags = [
+    const hashtags = [
       "#123",
       "#H",
       "#0",
@@ -38,46 +38,51 @@ void main() {
       "#trending_topic",
     ];
 
+    const userTags = [
+      '@helloWorld',
+      '@helloWorld123',
+      '@hello_world',
+      '@hello_world123',
+      '@hello_world_123'
+    ];
+
     ///
     test("Should match all emails", () {
-      _emails.forEach((e) {
-        bool hasMatch = RegExp(emailRegExp).hasMatch(e);
-        expect(hasMatch, isTrue);
-      });
-    });
-
-    test("Should not match all emails", () {
-      List<String> _emails = ["hello@world", "@js.com"];
-      _emails.forEach((e) {
-        bool hasMatch = RegExp(emailRegExp).hasMatch(e);
-        expect(hasMatch, isFalse);
-      });
+      for (final email in emails) {
+        expect(RegExp(emailRegExp).hasMatch(email), isTrue);
+      }
     });
 
     test("Should match all urls", () {
-      _urls.forEach((u) {
-        bool hasMatch = RegExp(urlRegExp).hasMatch(u);
-        expect(hasMatch, isTrue);
-      });
+      for (final url in urls) {
+        expect(RegExp(urlRegExp).hasMatch(url), isTrue);
+      }
     });
 
     test("Should match all hashtags", () {
-      _hashtags.forEach((h) {
-        bool hasMatch = RegExp(hashtagRegExp).hasMatch(h);
-        expect(hasMatch, isTrue);
-      });
+      for (final tag in hashtags) {
+        expect(RegExp(hashtagRegExp).hasMatch(tag), isTrue);
+      }
+    });
+    test("Should match all usertags", () {
+      for (final tag in userTags) {
+        expect(RegExp(userTagRegExp).hasMatch(tag), isTrue);
+      }
     });
 
-    test("Should construct regex pattern from LinkTypes and match length", () {
-      RegExp _urlRegExp = constructRegExpFromLinkType([LinkType.url]);
-      RegExp _hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
-      RegExp _emailRegExp = constructRegExpFromLinkType([LinkType.email]);
-      RegExp _textRegExp = constructRegExpFromLinkType(
+    test(
+        "Should construct regex pattern from LinkTypes and match required output",
+        () {
+      final urlRegExp = constructRegExpFromLinkType([LinkType.url]);
+      final hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
+      final emailRegExp = constructRegExpFromLinkType([LinkType.email]);
+      final textRegExp = constructRegExpFromLinkType(
           [LinkType.url, LinkType.hashTag, LinkType.email]);
-      expect(_urlRegExp.allMatches(_urlText).length, 4);
-      expect(_hashtagRegExp.allMatches(_hashtagText).length, 2);
-      expect(_emailRegExp.allMatches(_emailText).length, 2);
-      expect(_textRegExp.allMatches(_text).length, 8);
+
+      expect(urlRegExp.allMatches(urlText).length, 4);
+      expect(hashtagRegExp.allMatches(hashtagText).length, 2);
+      expect(emailRegExp.allMatches(emailText).length, 2);
+      expect(textRegExp.allMatches(text).length, 8);
     });
   });
 }

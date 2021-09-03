@@ -1,0 +1,11 @@
+include: package:lint/analysis_options.yaml
+analyzer:
+  errors:
+    missing_required_param: error
+    todo: info
+linter:
+  rules:
+    always-specify-types: true
+    prefer-relative-imports: true
+    sort_pub_dependencies: false
+    unnecessary_raw_strings: false

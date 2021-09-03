@@ -157,22 +157,22 @@ TextSpan _linkify({
   List<LinkType>? linkTypes,
   Function(Link)? onTap,
 }) {
-  RegExp _regExp = constructRegExpFromLinkType(linkTypes ?? [LinkType.url]);
+  final _regExp = constructRegExpFromLinkType(linkTypes ?? [LinkType.url]);
 
   //  return the full text if there's no match or if empty
   if (!_regExp.hasMatch(text) || text.isEmpty) return TextSpan(text: text);
 
-  List<String> texts = text.split(_regExp);
-  List<TextSpan> spans = [];
-  List<RegExpMatch> links = _regExp.allMatches(text).toList();
+  final texts = text.split(_regExp);
+  final List<InlineSpan> spans = [];
+  final links = _regExp.allMatches(text).toList();
 
-  for (String text in texts) {
+  for (final text in texts) {
     spans.add(TextSpan(
       text: text,
     ));
-    if (links.length > 0) {
-      RegExpMatch match = links.removeAt(0);
-      Link link = Link.fromMatch(match);
+    if (links.isNotEmpty) {
+      final match = links.removeAt(0);
+      final link = Link.fromMatch(match);
       // add the link
       spans.add(
         TextSpan(

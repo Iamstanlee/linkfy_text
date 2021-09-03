@@ -27,41 +27,39 @@ Container(
 )
 ```
 
-Be default, The above snippet would linkify all urls in the string, you can choose what type of link to linkify by passing the `linkTypes` parameter
+Be default, The above snippet would linkify all urls in the string, you can choose what type of link to linkify by passing the `Links` parameter
 
 ```dart
 Container(
     child: LinkifyText(
     "This text contains a url: https://flutter.dev and #flutter",
     linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
-    linkTypes: [LinkType.url, LinkType.hashtag]
+    Links: [Link.url, Link.hashtag]
     onTap: (link) {
         /// do stuff with `link` like
-        /// if(link.type == Linktype.url) launchUrl(link.value);
+        /// if(link.type == Link.url) launchUrl(link.value);
         },
     );
 )
 ```
 
-
 ## API Reference
 
 #### LinkfyText
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `textStyle`      | `TextStyle` | style applied to the text |
-| `linkStyle`      | `TextStyle` | style applied to the linkified text. **defaults** to `textStyle` |
-| `linkTypes`      | `List<LinkType>` | a list of `LinkType` used to override the links to be linkified in a text either a url, hashtag or email. **defaults** to `[LinkType.url]`|
-| `onTap`      | `Function(Link)` | function called when a link is pressed |
-
+| Parameter   | Type             | Description                                                                                                                        |
+| :---------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `textStyle` | `TextStyle`      | style applied to the text                                                                                                          |
+| `linkStyle` | `TextStyle`      | style applied to the linkified text. **defaults** to `textStyle`                                                                   |
+| `Links`     | `List<Link>`     | a list of `Link` used to override the links to be linkified in a text either a url, hashtag or email. **defaults** to `[Link.url]` |
+| `onTap`     | `Function(Link)` | function called when a link is pressed                                                                                             |
 
 #### Link
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `type`      | `LinkType` | the link type either url, email or hashtag |
-| `value`      | `String` | value this link holds |
+| Parameter | Type     | Description                                |
+| :-------- | :------- | :----------------------------------------- |
+| `type`    | `Link`   | the link type either url, email or hashtag |
+| `value`   | `String` | value this link holds                      |
 
 # Contributions
 
@@ -72,5 +70,4 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 
 # TODO
 
-- linkify "@" mention and "$" sign
 - LinkifyTextField widget

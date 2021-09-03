@@ -6,46 +6,55 @@ String hashtagRegExp = r'(#+[a-zA-Z0-9(_)]{1,})';
 
 String userTagRegExp = r'(?<![\w@])@([\w@]+(?:[.!][\w@]+)*)';
 
-String emailRegExp = r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
+String emailRegExp =
+    r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
 
-/// construct regexp. pattern from provided link linkTypes
-RegExp constructRegExpFromLinkType(List<LinkType> linkTypes) {
+/// construct regexp. pattern from provided link types
+RegExp constructRegExpFromLinkType(List<LinkType> types) {
   // default case where we always want to match url strings
-  if (linkTypes.length == 1 && linkTypes.first == LinkType.url) return RegExp(urlRegExp);
-
-  StringBuffer _regexBuffer = StringBuffer();
-  for (var i = 0; i < linkTypes.length; i++) {
-    final _type = linkTypes[i];
-    final _isLast = i == linkTypes.length - 1;
-    switch (_type) {
+  final len = types.length;
+  if (len == 1 && types.first == LinkType.url) {
+    return RegExp(urlRegExp);
+  }
+  final buffer = StringBuffer();
+  for (var i = 0; i < len; i++) {
+    final type = types[i];
+    final isLast = i == len - 1;
+    switch (type) {
       case LinkType.url:
-        _isLast ? _regexBuffer.write("($urlRegExp)") : _regexBuffer.write("($urlRegExp)|");
+        isLast ? buffer.write("($urlRegExp)") : buffer.write("($urlRegExp)|");
         break;
       case LinkType.hashTag:
-        _isLast ? _regexBuffer.write("($hashtagRegExp)") : _regexBuffer.write("($hashtagRegExp)|");
+        isLast
+            ? buffer.write("($hashtagRegExp)")
+            : buffer.write("($hashtagRegExp)|");
         break;
       case LinkType.userTag:
-        _isLast ? _regexBuffer.write("($userTagRegExp)") : _regexBuffer.write("($userTagRegExp)|");
+        isLast
+            ? buffer.write("($userTagRegExp)")
+            : buffer.write("($userTagRegExp)|");
         break;
       case LinkType.email:
-        _isLast ? _regexBuffer.write("($emailRegExp)") : _regexBuffer.write("($emailRegExp)|");
+        isLast
+            ? buffer.write("($emailRegExp)")
+            : buffer.write("($emailRegExp)|");
         break;
       default:
     }
   }
-  return RegExp(_regexBuffer.toString());
+  return RegExp(buffer.toString());
 }
 
 LinkType getMatchedType(RegExpMatch match) {
-  late LinkType _type;
+  late LinkType type;
   if (RegExp(urlRegExp).hasMatch(match.input)) {
-    _type = LinkType.url;
+    type = LinkType.url;
   } else if (RegExp(hashtagRegExp).hasMatch(match.input)) {
-    _type = LinkType.hashTag;
+    type = LinkType.hashTag;
   } else if (RegExp(emailRegExp).hasMatch(match.input)) {
-    _type = LinkType.email;
+    type = LinkType.email;
   } else if (RegExp(userTagRegExp).hasMatch(match.input)) {
-    _type = LinkType.userTag;
+    type = LinkType.userTag;
   }
-  return _type;
+  return type;
 }

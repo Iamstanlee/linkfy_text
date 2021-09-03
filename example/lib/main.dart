@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'linkify_text Demo',
+      title: 'linkfy_text Demo',
       scaffoldMessengerKey: _msgKey,
       debugShowCheckedModeBanner: false,
       home: App(),
