@@ -6,14 +6,14 @@ void main() {
   runApp(MyApp());
 }
 
-var _msgKey = GlobalKey<ScaffoldMessengerState>();
+final k = GlobalKey<ScaffoldMessengerState>();
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'linkfy_text Demo',
-      scaffoldMessengerKey: _msgKey,
+      scaffoldMessengerKey: k,
       debugShowCheckedModeBanner: false,
       home: App(),
     );
@@ -26,10 +26,10 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final _textStyle =
-      GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.w500);
+  final textStyle =
+      GoogleFonts.karla(fontSize: 16, fontWeight: FontWeight.w500);
 
-  final List<Map<String, dynamic?>> _texts = [
+  final List<Map<String, dynamic?>> texts = [
     {
       "text": "O1. This text contains a url: https://flutter.dev",
       "types": null
@@ -43,16 +43,25 @@ class _AppState extends State<App> {
       "types": [LinkType.hashTag]
     },
     {
+      "text": "O4. This text contains a @user tag",
+      "types": [LinkType.userTag]
+    },
+    {
       "text":
-          "O4. This text contains a url: https://flutter.dev, An email example@app.com and #hashtag",
-      "types": [LinkType.email, LinkType.url, LinkType.hashTag]
+          "O5. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev",
+      "types": [
+        LinkType.email,
+        LinkType.url,
+        LinkType.hashTag,
+        LinkType.userTag
+      ]
     },
   ];
 
   void showSnackbar(String msg) {
-    _msgKey.currentState!.removeCurrentSnackBar();
-    _msgKey.currentState!.showSnackBar(SnackBar(
-      content: Text("$msg", style: _textStyle),
+    k.currentState!.removeCurrentSnackBar();
+    k.currentState!.showSnackBar(SnackBar(
+      content: Text("$msg", style: textStyle),
       behavior: SnackBarBehavior.floating,
     ));
   }
@@ -68,24 +77,26 @@ class _AppState extends State<App> {
           children: [
             Center(
               child: Text(
-                "LinkifyText",
-                style: _textStyle.copyWith(
+                "LinkfyText Example",
+                style: textStyle.copyWith(
                   fontSize: 24,
                 ),
               ),
             ),
-            for (var i = 0; i < _texts.length; i++)
+            for (var i = 0; i < texts.length; i++)
               Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 14),
                   child: LinkifyText(
-                    _texts[i]['text'],
-                    textAlign: TextAlign.center,
-                    linkTypes: _texts[i]['types'],
-                    textStyle: _textStyle,
-                    linkStyle: _textStyle.copyWith(color: Colors.blue),
-                    onTap: (link) {
-                      showSnackbar("link tapped: ${link.value!}");
-                    },
+                    texts[i]['text'],
+                    textAlign: TextAlign.left,
+                    linkTypes: texts[i]['types'],
+                    textStyle: textStyle,
+                    linkStyle: textStyle.copyWith(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    onTap: (link) =>
+                        showSnackbar("link pressed: ${link.value!}"),
                   )),
           ],
         ),
