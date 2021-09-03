@@ -1,10 +1,15 @@
 # linkfy_text
 
-A lightweight flutter package that linkifies a text containing urls, emails and hashtag like twitter does.
+A lightweight flutter package that linkifies a text containing urls, emails, mentions and hashtag like twitter does.
 
 [![pub package](https://img.shields.io/pub/v/linkfy_text.svg)](https://pub.dev/packages/linkfy_text)
+[![build status](https://img.shields.io/github/workflow/status/Iamstanlee/linkfy_text/CI)](https://github.com/Iamstanlee/linkfy_text/actions?query=CI)
+[![coverage Status](https://coveralls.io/repos/github/Iamstanlee/linkfy_text/badge.svg?branch=main)](https://coveralls.io/github/Iamstanlee/linkfy_text?branch=main)
 
-![gif](https://github.com/Iamstanlee/linkfy_text/blob/main/ezgif.com-gif-maker.gif)
+<p>
+    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/1.png" width="200px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/Iamstanlee/linkfy_text/main/screenshots/2.png" width="200px" height="auto" hspace="20"/>
+</p>
 
 ## Usage
 
@@ -19,7 +24,7 @@ import 'package:linkfy_text/linkify_text.dart';
 Container(
     child: LinkifyText(
     "This text contains a url: https://flutter.dev",
-    linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
+    linkStyle: TextStyle(color: Colors.blue),
     onTap: (link) {
         /// do stuff with `link`
         },
@@ -27,14 +32,14 @@ Container(
 )
 ```
 
-Be default, The above snippet would linkify all urls in the string, you can choose what type of link to linkify by passing the `Links` parameter
+Be default, The above snippet would linkify all urls in the string, you can choose what type of link to linkify by passing the `LinkTypes` parameter
 
 ```dart
 Container(
     child: LinkifyText(
     "This text contains a url: https://flutter.dev and #flutter",
-    linkStyle: TextStyle(color: Colors.blue, fontSize: 16),
-    Links: [Link.url, Link.hashtag]
+    linkStyle: TextStyle(color: Colors.blue),
+    LinkTypes: [LinkType.url, LinkType.hashtag]
     onTap: (link) {
         /// do stuff with `link` like
         /// if(link.type == Link.url) launchUrl(link.value);
@@ -47,19 +52,19 @@ Container(
 
 #### LinkfyText
 
-| Parameter   | Type             | Description                                                                                                                        |
-| :---------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| `textStyle` | `TextStyle`      | style applied to the text                                                                                                          |
-| `linkStyle` | `TextStyle`      | style applied to the linkified text. **defaults** to `textStyle`                                                                   |
-| `Links`     | `List<Link>`     | a list of `Link` used to override the links to be linkified in a text either a url, hashtag or email. **defaults** to `[Link.url]` |
-| `onTap`     | `Function(Link)` | function called when a link is pressed                                                                                             |
+| Parameter   | Type             | Description                                                                                                                                 |
+| :---------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `textStyle` | `TextStyle`      | style applied to the text                                                                                                                   |
+| `linkStyle` | `TextStyle`      | style applied to the linkified text. **defaults** to `textStyle`                                                                            |
+| `LinkTypes` | `List<LinkType>` | a list of `LinkType` used to override the links to be linkified in a text either a url, hashtag or email. **defaults** to `[LinkTypes.url]` |
+| `onTap`     | `Function(Link)` | function called when a link is pressed                                                                                                      |
 
-#### Link
+#### LinkType
 
-| Parameter | Type     | Description                                |
-| :-------- | :------- | :----------------------------------------- |
-| `type`    | `Link`   | the link type either url, email or hashtag |
-| `value`   | `String` | value this link holds                      |
+| Parameter | Type     | Description                                          |
+| :-------- | :------- | :--------------------------------------------------- |
+| `type`    | `Link`   | the link type either url, email or hashtag, @mention |
+| `value`   | `String` | value the link holds                                 |
 
 # Contributions
 
