@@ -47,13 +47,19 @@ class _AppState extends State<App> {
       "types": [LinkType.userTag]
     },
     {
+      "text": "O5. This text contains a 《book name》",
+      "types": [LinkType.bookTag]
+    },
+    {
       "text":
-          "O5. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev",
+          "O6. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example"
+              ".com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev, some book 《Taiwan is part of China》",
       "types": [
         LinkType.email,
         LinkType.url,
         LinkType.hashTag,
-        LinkType.userTag
+        LinkType.userTag,
+        LinkType.bookTag
       ]
     },
   ];

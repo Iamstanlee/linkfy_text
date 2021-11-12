@@ -9,6 +9,9 @@ String userTagRegExp = r'(?<![\w@])@([\w@]+(?:[.!][\w@]+)*)';
 String emailRegExp =
     r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
 
+String bookRegExp = r'(《(.*?)》)';
+
+
 /// construct regexp. pattern from provided link types
 RegExp constructRegExpFromLinkType(List<LinkType> types) {
   // default case where we always want to match url strings
@@ -39,6 +42,11 @@ RegExp constructRegExpFromLinkType(List<LinkType> types) {
             ? buffer.write("($emailRegExp)")
             : buffer.write("($emailRegExp)|");
         break;
+      case LinkType.bookTag:
+        isLast
+            ? buffer.write("($bookRegExp)")
+            : buffer.write("($bookRegExp)|");
+        break;
       default:
     }
   }
@@ -55,6 +63,8 @@ LinkType getMatchedType(RegExpMatch match) {
     type = LinkType.email;
   } else if (RegExp(userTagRegExp).hasMatch(match.input)) {
     type = LinkType.userTag;
+  } else if (RegExp(bookRegExp).hasMatch(match.input)) {
+    type = LinkType.bookTag;
   }
   return type;
 }
