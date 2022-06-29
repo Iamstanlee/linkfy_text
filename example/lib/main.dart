@@ -91,6 +91,12 @@ class _AppState extends State<App> {
                     textAlign: TextAlign.left,
                     linkTypes: texts[i]['types'],
                     textStyle: textStyle,
+                    customLinkStyles: {
+                      LinkType.email: TextStyle(color: Colors.blue),
+                      LinkType.hashTag: TextStyle(color: Colors.green),
+                      LinkType.userTag: TextStyle(color: Colors.deepPurple),
+                      LinkType.url: TextStyle(color: Colors.pink),
+                    },
                     linkStyle: textStyle.copyWith(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,

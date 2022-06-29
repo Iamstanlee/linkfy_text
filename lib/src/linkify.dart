@@ -11,6 +11,7 @@ class LinkifyText extends StatelessWidget {
       this.linkStyle,
       this.linkTypes,
       this.onTap,
+      this.customLinkStyles,
       this.strutStyle,
       this.textAlign,
       this.textDirection,
@@ -126,15 +127,17 @@ class LinkifyText extends StatelessWidget {
   /// {@macro flutter.painting.textPainter.textWidthBasis}
   final TextWidthBasis? textWidthBasis;
 
+  final Map<LinkType, TextStyle>? customLinkStyles;
+
   @override
   Widget build(BuildContext context) {
     return Text.rich(
       _linkify(
-        text: text,
-        linkStyle: linkStyle,
-        onTap: onTap,
-        linkTypes: linkTypes,
-      ),
+          text: text,
+          linkStyle: linkStyle,
+          onTap: onTap,
+          linkTypes: linkTypes,
+          customLinkStyles: customLinkStyles),
       key: key,
       style: textStyle,
       strutStyle: strutStyle,
@@ -155,6 +158,7 @@ TextSpan _linkify({
   String text = '',
   TextStyle? linkStyle,
   List<LinkType>? linkTypes,
+  Map<LinkType, TextStyle>? customLinkStyles,
   Function(Link)? onTap,
 }) {
   final _regExp = constructRegExpFromLinkType(linkTypes ?? [LinkType.url]);
@@ -177,7 +181,7 @@ TextSpan _linkify({
       spans.add(
         TextSpan(
           text: link.value,
-          style: linkStyle,
+          style: customLinkStyles?[link.type] ?? linkStyle,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
               if (onTap != null) onTap(link);
