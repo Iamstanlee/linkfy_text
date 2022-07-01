@@ -45,15 +45,15 @@ RegExp constructRegExpFromLinkType(List<LinkType> types) {
   return RegExp(buffer.toString());
 }
 
-LinkType getMatchedType(RegExpMatch match) {
+LinkType getMatchedType(String match) {
   late LinkType type;
-  if (RegExp(urlRegExp).hasMatch(match.input)) {
-    type = LinkType.url;
-  } else if (RegExp(hashtagRegExp).hasMatch(match.input)) {
-    type = LinkType.hashTag;
-  } else if (RegExp(emailRegExp).hasMatch(match.input)) {
+  if (RegExp(emailRegExp).hasMatch(match)) {
     type = LinkType.email;
-  } else if (RegExp(userTagRegExp).hasMatch(match.input)) {
+  } else if (RegExp(urlRegExp).hasMatch(match)) {
+    type = LinkType.url;
+  } else if (RegExp(hashtagRegExp).hasMatch(match)) {
+    type = LinkType.hashTag;
+  } else if (RegExp(userTagRegExp).hasMatch(match)) {
     type = LinkType.userTag;
   }
   return type;
