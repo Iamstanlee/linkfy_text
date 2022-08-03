@@ -48,7 +48,7 @@ class _AppState extends State<App> {
     },
     {
       "text":
-          "O5. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev",
+          "O5. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user",
       "types": [
         LinkType.email,
         LinkType.url,
