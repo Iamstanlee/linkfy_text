@@ -1,5 +1,7 @@
+import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
+
 import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:linkfy_text/src/enum.dart';
 import 'package:linkfy_text/src/model/link.dart';
 import 'package:linkfy_text/src/utils/regex.dart';
@@ -150,6 +152,223 @@ class LinkifyText extends StatelessWidget {
       overflow: overflow,
       maxLines: maxLines,
       locale: locale,
+    );
+  }
+}
+
+class LinkifySelectableText extends StatelessWidget {
+  const LinkifySelectableText(
+    this.text, {
+    Key? key,
+    this.focusNode,
+    this.textStyle,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.textScaleFactor,
+    this.autofocus = false,
+    this.minLines,
+    this.maxLines,
+    this.showCursor = false,
+    this.cursorWidth = 2.0,
+    this.cursorHeight,
+    this.cursorRadius,
+    this.cursorColor,
+    this.selectionHeightStyle = ui.BoxHeightStyle.tight,
+    this.selectionWidthStyle = ui.BoxWidthStyle.tight,
+    this.enableInteractiveSelection = true,
+    this.selectionControls,
+    this.dragStartBehavior = DragStartBehavior.start,
+    ToolbarOptions? toolbarOptions,
+    this.onTap,
+    this.scrollPhysics,
+    this.semanticsLabel,
+    this.textHeightBehavior,
+    this.textWidthBasis,
+    this.onSelectionChanged,
+    this.customLinkStyles,
+    this.linkStyle,
+    this.linkTypes,
+  })  : toolbarOptions = toolbarOptions ??
+            const ToolbarOptions(
+              selectAll: true,
+              copy: true,
+            ),
+        super(key: key);
+
+  /// The text to display.
+  ///
+  final String text;
+
+  /// Defines the focus for this widget.
+  ///
+  /// Text is only selectable when widget is focused.
+  ///
+  /// The [focusNode] is a long-lived object that's typically managed by a
+  /// [StatefulWidget] parent. See [FocusNode] for more information.
+  ///
+  /// To give the focus to this widget, provide a [focusNode] and then
+  /// use the current [FocusScope] to request the focus:
+  ///
+  /// ```dart
+  /// FocusScope.of(context).requestFocus(myFocusNode);
+  /// ```
+  ///
+  /// This happens automatically when the widget is tapped.
+  ///
+  /// To be notified when the widget gains or loses the focus, add a listener
+  /// to the [focusNode]:
+  ///
+  /// ```dart
+  /// focusNode.addListener(() { print(myFocusNode.hasFocus); });
+  /// ```
+  ///
+  /// If null, this widget will create its own [FocusNode] with
+  /// [FocusNode.skipTraversal] parameter set to `true`, which causes the widget
+  /// to be skipped over during focus traversal.
+  final FocusNode? focusNode;
+
+  /// The style to use for the text.
+  ///
+  /// If null, defaults [DefaultTextStyle] of context.
+  final TextStyle? textStyle;
+
+  /// {@macro flutter.widgets.editableText.strutStyle}
+  final StrutStyle? strutStyle;
+
+  /// {@macro flutter.widgets.editableText.textAlign}
+  final TextAlign? textAlign;
+
+  /// {@macro flutter.widgets.editableText.textDirection}
+  final TextDirection? textDirection;
+
+  /// {@macro flutter.widgets.editableText.textScaleFactor}
+  final double? textScaleFactor;
+
+  /// {@macro flutter.widgets.editableText.autofocus}
+  final bool autofocus;
+
+  /// {@macro flutter.widgets.editableText.minLines}
+  final int? minLines;
+
+  /// {@macro flutter.widgets.editableText.maxLines}
+  final int? maxLines;
+
+  /// {@macro flutter.widgets.editableText.showCursor}
+  final bool showCursor;
+
+  /// {@macro flutter.widgets.editableText.cursorWidth}
+  final double cursorWidth;
+
+  /// {@macro flutter.widgets.editableText.cursorHeight}
+  final double? cursorHeight;
+
+  /// {@macro flutter.widgets.editableText.cursorRadius}
+  final Radius? cursorRadius;
+
+  /// The color to use when painting the cursor.
+  ///
+  /// Defaults to the theme's `cursorColor` when null.
+  final Color? cursorColor;
+
+  /// Controls how tall the selection highlight boxes are computed to be.
+  ///
+  /// See [ui.BoxHeightStyle] for details on available styles.
+  final ui.BoxHeightStyle selectionHeightStyle;
+
+  /// Controls how wide the selection highlight boxes are computed to be.
+  ///
+  /// See [ui.BoxWidthStyle] for details on available styles.
+  final ui.BoxWidthStyle selectionWidthStyle;
+
+  /// {@macro flutter.widgets.editableText.enableInteractiveSelection}
+  final bool enableInteractiveSelection;
+
+  /// {@macro flutter.widgets.editableText.selectionControls}
+  final TextSelectionControls? selectionControls;
+
+  /// {@macro flutter.widgets.scrollable.dragStartBehavior}
+  final DragStartBehavior dragStartBehavior;
+
+  /// Configuration of toolbar options.
+  ///
+  /// Paste and cut will be disabled regardless.
+  ///
+  /// If not set, select all and copy will be enabled by default.
+  final ToolbarOptions toolbarOptions;
+
+  /// {@macro flutter.widgets.editableText.selectionEnabled}
+  bool get selectionEnabled => enableInteractiveSelection;
+
+  /// {@macro flutter.widgets.editableText.scrollPhysics}
+  final ScrollPhysics? scrollPhysics;
+
+  /// {@macro flutter.widgets.Text.semanticsLabel}
+  final String? semanticsLabel;
+
+  /// {@macro dart.ui.textHeightBehavior}
+  final TextHeightBehavior? textHeightBehavior;
+
+  /// {@macro flutter.painting.textPainter.textWidthBasis}
+  final TextWidthBasis? textWidthBasis;
+
+  /// {@macro flutter.widgets.editableText.onSelectionChanged}
+  final SelectionChangedCallback? onSelectionChanged;
+
+  final Map<LinkType, TextStyle>? customLinkStyles;
+
+  /// [textStyle] added to the formatted links in the text
+  final TextStyle? linkStyle;
+
+  /// called when a formatted link is pressed, it returns the link as a parameter
+  /// ```dart
+  ///   LinkifyText("#helloWorld", onTap: (link) {
+  ///       // do stuff with link
+  ///       print("${link.value} hashtag was tapped");
+  ///   });
+  /// ```
+  final void Function(Link)? onTap;
+
+  /// option to override the links to be formatted in the text, defaults to `[LinkType.url]`
+  /// so only urls are being linkified in the text
+  final List<LinkType>? linkTypes;
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText.rich(
+      _linkify(
+        text: text,
+        linkStyle: linkStyle,
+        onTap: onTap,
+        linkTypes: linkTypes,
+        customLinkStyles: customLinkStyles,
+      ),
+      key: key,
+      focusNode: focusNode,
+      style: textStyle,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      textScaleFactor: textScaleFactor,
+      showCursor: showCursor,
+      autofocus: autofocus,
+      toolbarOptions: toolbarOptions,
+      minLines: minLines,
+      maxLines: maxLines,
+      cursorWidth: cursorWidth,
+      cursorHeight: cursorHeight,
+      cursorRadius: cursorRadius,
+      cursorColor: cursorColor,
+      selectionHeightStyle: selectionHeightStyle,
+      selectionWidthStyle: selectionWidthStyle,
+      dragStartBehavior: dragStartBehavior,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectionControls: selectionControls,
+      scrollPhysics: scrollPhysics,
+      semanticsLabel: semanticsLabel,
+      textHeightBehavior: textHeightBehavior,
+      textWidthBasis: textWidthBasis,
+      onSelectionChanged: onSelectionChanged,
     );
   }
 }
