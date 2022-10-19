@@ -5,7 +5,8 @@ String urlRegExp = r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+';
 String hashtagRegExp = r'(#+[a-zA-Z0-9(_)]{1,})';
 
 String userTagRegExp = r'(?<![\w@])@([\w@]+(?:[.!][\w@]+)*)';
-
+String phoneRegExp =
+    r'\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*';
 String emailRegExp =
     r"([a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+)";
 
@@ -39,6 +40,11 @@ RegExp constructRegExpFromLinkType(List<LinkType> types) {
             ? buffer.write("($emailRegExp)")
             : buffer.write("($emailRegExp)|");
         break;
+      case LinkType.phone:
+        isLast
+            ? buffer.write("($phoneRegExp)")
+            : buffer.write("($phoneRegExp)|");
+        break;
       default:
     }
   }
@@ -49,12 +55,14 @@ LinkType getMatchedType(String match) {
   late LinkType type;
   if (RegExp(emailRegExp).hasMatch(match)) {
     type = LinkType.email;
+  } else if (RegExp(phoneRegExp).hasMatch(match)) {
+    type = LinkType.phone;
   } else if (RegExp(userTagRegExp).hasMatch(match)) {
     type = LinkType.userTag;
-  }else if (RegExp(urlRegExp).hasMatch(match)) {
+  } else if (RegExp(urlRegExp).hasMatch(match)) {
     type = LinkType.url;
   } else if (RegExp(hashtagRegExp).hasMatch(match)) {
     type = LinkType.hashTag;
-  } 
+  }
   return type;
 }
