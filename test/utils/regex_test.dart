@@ -10,7 +10,9 @@ void main() {
     const hashtagText = "#helloWorld and #dev are trending";
     const emailText =
         "My email address is hey@stanleee.me and dev@gmail.com, yah!";
-    const text = urlText + hashtagText + emailText;
+
+    const phoneText = "My phone number is (222)322-3222 or +15552223333";
+    const text = urlText + hashtagText + emailText + phoneText;
 
     const emails = ["hello@world.com", "foo.bar@js.com"];
 
@@ -46,6 +48,14 @@ void main() {
       '@hello_world_123'
     ];
 
+    const phoneNums = [
+      "1112223333",
+      "(111)222 3333",
+      "+5444333222",
+      "+91 (123) 456-7890",
+      "123-456-7890"
+    ];
+
     ///
     test("Should match all emails", () {
       for (final email in emails) {
@@ -69,6 +79,11 @@ void main() {
         expect(RegExp(userTagRegExp).hasMatch(tag), isTrue);
       }
     });
+    test("Should match all phones", () {
+      for (final tag in phoneNums) {
+        expect(RegExp(phoneRegExp).hasMatch(tag), isTrue);
+      }
+    });
 
     test(
         "Should construct regex pattern from LinkTypes and match required output",
@@ -76,13 +91,15 @@ void main() {
       final urlRegExp = constructRegExpFromLinkType([LinkType.url]);
       final hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
       final emailRegExp = constructRegExpFromLinkType([LinkType.email]);
+      final phoneRegExp = constructRegExpFromLinkType([LinkType.phone]);
       final textRegExp = constructRegExpFromLinkType(
-          [LinkType.url, LinkType.hashTag, LinkType.email]);
+          [LinkType.url, LinkType.hashTag, LinkType.email, LinkType.phone]);
 
       expect(urlRegExp.allMatches(urlText).length, 4);
       expect(hashtagRegExp.allMatches(hashtagText).length, 2);
       expect(emailRegExp.allMatches(emailText).length, 2);
-      expect(textRegExp.allMatches(text).length, 8);
+      expect(phoneRegExp.allMatches(phoneText).length, 2);
+      expect(textRegExp.allMatches(text).length, 10);
     });
   });
 }
