@@ -47,13 +47,18 @@ class _AppState extends State<App> {
       "types": [LinkType.userTag]
     },
     {
+      "text": "O5. This text contains a phone number: (555) 444 2223",
+      "types": [LinkType.phone]
+    },
+    {
       "text":
-          "O5. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user",
+          "O6. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user +18009999999",
       "types": [
+        LinkType.phone,
         LinkType.email,
         LinkType.url,
         LinkType.hashTag,
-        LinkType.userTag
+        LinkType.userTag,
       ]
     },
   ];
@@ -96,13 +101,14 @@ class _AppState extends State<App> {
                       LinkType.hashTag: TextStyle(color: Colors.green),
                       LinkType.userTag: TextStyle(color: Colors.deepPurple),
                       LinkType.url: TextStyle(color: Colors.pink),
+                      LinkType.phone: TextStyle(color: Colors.deepOrange),
                     },
                     linkStyle: textStyle.copyWith(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
-                    onTap: (link) =>
-                        showSnackbar("link pressed: ${link.value!}"),
+                    onTap: (link) => showSnackbar(
+                        "link pressed: ${link.value!}. Type: ${link.type}"),
                   )),
           ],
         ),
