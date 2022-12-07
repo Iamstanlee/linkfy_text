@@ -66,6 +66,7 @@ void main() {
     test("Should match all urls", () {
       for (final url in urls) {
         expect(RegExp(urlRegExp).hasMatch(url), isTrue);
+        print(url);
       }
     });
 
