@@ -66,7 +66,6 @@ void main() {
     test("Should match all urls", () {
       for (final url in urls) {
         expect(RegExp(urlRegExp).hasMatch(url), isTrue);
-        print(url);
       }
     });
 
@@ -100,7 +99,7 @@ void main() {
       expect(hashtagRegExp.allMatches(hashtagText).length, 2);
       expect(emailRegExp.allMatches(emailText).length, 2);
       expect(phoneRegExp.allMatches(phoneText).length, 2);
-      expect(textRegExp.allMatches(text).length, 10);
+      expect(textRegExp.allMatches(text).length, 9);
     });
   });
 }
