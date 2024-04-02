@@ -1,6 +1,6 @@
 name: linkfy_text
 description: A lightweight flutter package to linkify texts containing urls, emails and hashtags like twitter does.
-version: 1.1.5
+version: 1.1.6
 homepage: https://github.com/Iamstanlee/linkfy_text
 
 environment:
