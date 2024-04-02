@@ -1,9 +1,9 @@
 # linkfy_text
 
-A lightweight flutter package that linkifies a text containing urls, emails, mentions and hashtag like twitter does.
+Lightweight flutter package that detects linkable patterns(urls, emails, hashtags, etc) in a text and makes them clickable. It also allows you to customize the style of the linkified text and the link itself. It also allows you to choose what type of link to linkify in a text.¬ 
 
 [![pub package](https://img.shields.io/pub/v/linkfy_text.svg)](https://pub.dev/packages/linkfy_text)
-[![build status](https://img.shields.io/github/workflow/status/Iamstanlee/linkfy_text/CI)](https://github.com/Iamstanlee/linkfy_text/actions?query=CI)
+[![CI](https://github.com/Iamstanlee/linkfy_text/actions/workflows/main.yml/badge.svg)](https://github.com/Iamstanlee/linkfy_text/actions/workflows/main.yml)
 [![coverage Status](https://coveralls.io/repos/github/Iamstanlee/linkfy_text/badge.svg?branch=main)](https://coveralls.io/github/Iamstanlee/linkfy_text?branch=main)
 
 <p>

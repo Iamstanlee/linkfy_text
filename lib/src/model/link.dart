@@ -9,7 +9,7 @@ class Link {
 
   /// construct link from matched regExp
   Link.fromMatch(RegExpMatch match) {
-    String _match = match.input.substring(match.start, match.end);
+    final String _match = match.input.substring(match.start, match.end);
     _type = getMatchedType(_match);
     _value = _match;
   }
