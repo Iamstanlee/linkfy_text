@@ -12,7 +12,8 @@ void main() {
         "My email address is hey@stanleee.me and dev@gmail.com, yah!";
 
     const phoneText = "My phone number is (222)322-3222 or +15552223333";
-    const text = urlText + hashtagText + emailText + phoneText;
+    const userTagText = "Follow me @user_name";
+    const text = urlText + hashtagText + emailText + phoneText + userTagText;
 
     const emails = ["hello@world.com", "foo.bar@js.com"];
 
@@ -60,28 +61,33 @@ void main() {
     test("Should match all emails", () {
       for (final email in emails) {
         expect(RegExp(emailRegExp).hasMatch(email), isTrue);
+        expect(getMatchedType(email), equals(LinkType.email));
       }
     });
 
     test("Should match all urls", () {
       for (final url in urls) {
         expect(RegExp(urlRegExp).hasMatch(url), isTrue);
+        expect(getMatchedType(url), equals(LinkType.url));
       }
     });
 
     test("Should match all hashtags", () {
       for (final tag in hashtags) {
         expect(RegExp(hashtagRegExp).hasMatch(tag), isTrue);
+        expect(getMatchedType(tag), equals(LinkType.hashTag));
       }
     });
     test("Should match all usertags", () {
       for (final tag in userTags) {
         expect(RegExp(userTagRegExp).hasMatch(tag), isTrue);
+        expect(getMatchedType(tag), equals(LinkType.userTag));
       }
     });
     test("Should match all phones", () {
-      for (final tag in phoneNums) {
-        expect(RegExp(phoneRegExp).hasMatch(tag), isTrue);
+      for (final phone in phoneNums) {
+        expect(RegExp(phoneRegExp).hasMatch(phone), isTrue);
+        expect(getMatchedType(phone), equals(LinkType.phone));
       }
     });
 
@@ -92,14 +98,21 @@ void main() {
       final hashtagRegExp = constructRegExpFromLinkType([LinkType.hashTag]);
       final emailRegExp = constructRegExpFromLinkType([LinkType.email]);
       final phoneRegExp = constructRegExpFromLinkType([LinkType.phone]);
-      final textRegExp = constructRegExpFromLinkType(
-          [LinkType.url, LinkType.hashTag, LinkType.email, LinkType.phone]);
+      final userTagRegExp = constructRegExpFromLinkType([LinkType.userTag]);
+      final textRegExp = constructRegExpFromLinkType([
+        LinkType.url,
+        LinkType.hashTag,
+        LinkType.email,
+        LinkType.phone,
+        LinkType.userTag,
+      ]);
 
       expect(urlRegExp.allMatches(urlText).length, 4);
+      expect(userTagRegExp.allMatches(userTagText).length, 1);
       expect(hashtagRegExp.allMatches(hashtagText).length, 2);
       expect(emailRegExp.allMatches(emailText).length, 2);
       expect(phoneRegExp.allMatches(phoneText).length, 2);
-      expect(textRegExp.allMatches(text).length, 9);
+      expect(textRegExp.allMatches(text).length, 10);
     });
   });
 }

@@ -5,7 +5,5 @@ analyzer:
     todo: info
 linter:
   rules:
-    always-specify-types: true
-    prefer-relative-imports: true
     sort_pub_dependencies: false
     unnecessary_raw_strings: false

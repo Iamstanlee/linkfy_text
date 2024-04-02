@@ -20,7 +20,7 @@ class LinkifyText extends StatelessWidget {
       this.locale,
       this.softWrap,
       this.overflow,
-      this.textScaleFactor,
+      this.textScaler,
       this.maxLines,
       this.semanticsLabel,
       this.textWidthBasis,
@@ -95,9 +95,9 @@ class LinkifyText extends StatelessWidget {
   /// the specified font size.
   ///
   /// The value given to the constructor as textScaleFactor. If null, will
-  /// use the [MediaQueryData.textScaleFactor] obtained from the ambient
+  /// use the [MediaQueryData.textScaler] obtained from the ambient
   /// [MediaQuery], or 1.0 if there is no [MediaQuery] in scope.
-  final double? textScaleFactor;
+  final TextScaler? textScaler;
 
   /// An optional maximum number of lines for the text to span, wrapping if necessary.
   /// If the text exceeds the given number of lines, it will be truncated according
@@ -145,7 +145,7 @@ class LinkifyText extends StatelessWidget {
       strutStyle: strutStyle,
       textAlign: textAlign,
       textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
+      textScaler: textScaler,
       textWidthBasis: textWidthBasis,
       semanticsLabel: semanticsLabel,
       softWrap: softWrap,
@@ -165,7 +165,7 @@ class LinkifySelectableText extends StatelessWidget {
     this.strutStyle,
     this.textAlign,
     this.textDirection,
-    this.textScaleFactor,
+    this.textScaler,
     this.autofocus = false,
     this.minLines,
     this.maxLines,
@@ -179,7 +179,6 @@ class LinkifySelectableText extends StatelessWidget {
     this.enableInteractiveSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
-    ToolbarOptions? toolbarOptions,
     this.onTap,
     this.scrollPhysics,
     this.semanticsLabel,
@@ -189,12 +188,8 @@ class LinkifySelectableText extends StatelessWidget {
     this.customLinkStyles,
     this.linkStyle,
     this.linkTypes,
-  })  : toolbarOptions = toolbarOptions ??
-            const ToolbarOptions(
-              selectAll: true,
-              copy: true,
-            ),
-        super(key: key);
+    this.contextMenuBuilder,
+  }) : super(key: key);
 
   /// The text to display.
   ///
@@ -242,8 +237,8 @@ class LinkifySelectableText extends StatelessWidget {
   /// {@macro flutter.widgets.editableText.textDirection}
   final TextDirection? textDirection;
 
-  /// {@macro flutter.widgets.editableText.textScaleFactor}
-  final double? textScaleFactor;
+  /// {@macro flutter.widgets.editableText.textScaler}
+  final TextScaler? textScaler;
 
   /// {@macro flutter.widgets.editableText.autofocus}
   final bool autofocus;
@@ -295,7 +290,7 @@ class LinkifySelectableText extends StatelessWidget {
   /// Paste and cut will be disabled regardless.
   ///
   /// If not set, select all and copy will be enabled by default.
-  final ToolbarOptions toolbarOptions;
+  final Widget Function(BuildContext, EditableTextState)? contextMenuBuilder;
 
   /// {@macro flutter.widgets.editableText.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
@@ -349,10 +344,10 @@ class LinkifySelectableText extends StatelessWidget {
       strutStyle: strutStyle,
       textAlign: textAlign,
       textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
+      textScaler: textScaler,
       showCursor: showCursor,
       autofocus: autofocus,
-      toolbarOptions: toolbarOptions,
+      contextMenuBuilder: contextMenuBuilder,
       minLines: minLines,
       maxLines: maxLines,
       cursorWidth: cursorWidth,

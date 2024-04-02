@@ -27,9 +27,9 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final textStyle =
-      GoogleFonts.karla(fontSize: 16, fontWeight: FontWeight.w500);
+      GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w400);
 
-  final List<Map<String, dynamic?>> texts = [
+  final List<Map<String, dynamic>> texts = [
     {
       "text": "O1. This text contains a url: https://flutter.dev",
       "types": null
@@ -52,7 +52,7 @@ class _AppState extends State<App> {
     },
     {
       "text":
-          "O6. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link http://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user +18009999999",
+          "O6. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link https://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user +18009999999",
       "types": [
         LinkType.phone,
         LinkType.email,
