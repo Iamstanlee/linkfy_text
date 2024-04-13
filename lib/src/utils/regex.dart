@@ -59,13 +59,13 @@ LinkType getMatchedType(String match) {
   late LinkType type;
   if (RegExp(emailRegExp).hasMatch(match)) {
     type = LinkType.email;
-  } else if (RegExp(phoneRegExp).hasMatch(match)) {
+  } else if (RegExp(urlRegExp).hasMatch(match)) {
+    type = LinkType.url;
+  }else if (RegExp(phoneRegExp).hasMatch(match)) {
     type = LinkType.phone;
   } else if (RegExp(userTagRegExp).hasMatch(match)) {
     type = LinkType.userTag;
-  } else if (RegExp(urlRegExp).hasMatch(match)) {
-    type = LinkType.url;
-  } else if (RegExp(hashtagRegExp).hasMatch(match)) {
+  }  else if (RegExp(hashtagRegExp).hasMatch(match)) {
     type = LinkType.hashTag;
   }
   return type;
