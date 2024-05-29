@@ -8,7 +8,7 @@ String urlRegExp =
 
 String hashtagRegExp = r'(#+[a-zA-Z0-9(_)]{1,})';
 
-String userTagRegExp = r'(?<![\w@])@([\w@]+(?:[.!][\w@]+)*)';
+String userTagRegExp = r'@[a-zA-Z\u00C0-\u01B4\w_\u1EA0-\u1EF9!$%^&]{1,}(?=\s|$)';
 String phoneRegExp =
     r'\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*';
 String emailRegExp =
